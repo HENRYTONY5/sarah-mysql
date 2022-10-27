@@ -7,9 +7,15 @@ import dotenv from "dotenv";
 
 
 import agentesRoutes from './routes/agentes.routes.js'
-import Routes from './routes/router.js'
-// import indexR from './routes/index.routes.js'
+//import Routes from './routes/router.js'
+import indexR from './routes/index.routes.js'
 
+// Set express as Node.js web application
+// server framework.
+// To install express before using it as
+// an application server by using
+// "npm install express" command.
+// var express = require('express');
 var app = express();
  
 // Set EJS as templating engine
@@ -18,16 +24,22 @@ dotenv.config();
 app.use(express.json());
 app.use(express.static('public'))
 app.use(cors())
-
-app.get("/", function (req, res) {
-     res.render("../pages/index");
-  });
+// const app = express();
+// app.get("/", function (req, res) {
+//      res.render("../pages/index");
+//   });
   app.get("/login", function (req, res) {
     res.render("../pages/login");
   });
+  app.get("/register", function (req, res) {
+    res.render("../pages/register");
+  });
+  app.get("/", function (req, res) {
+    res.render("../pages/index");
+  });
 
 //app.use(indexR) -> pong
-app.use('/api',Routes)
+//app.use('/api',Routes)
 app.use('/api',agentesRoutes)
 
 app.use((req, res, next) =>{
