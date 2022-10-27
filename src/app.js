@@ -41,7 +41,6 @@ app.use(cors())
 //app.use(indexR) -> pong
 //app.use('/api',Routes)
 app.use('/api',agentesRoutes)
-
 app.use((req, res, next) =>{
     res.status(404).json({
         message: 'endpoint not found'
