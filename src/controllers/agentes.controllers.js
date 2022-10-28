@@ -40,7 +40,7 @@ export const getAgente = async (req, res) => {
 export const createAgentes = async (req, res) => {
     try {
         console.log(req.body);
-        const { name, usuario, phone, passwd } = req.body;
+        const { name, usuario, phone, passwd } = req.body; 
         const [rows] = await pool.query(
             "INSERT INTO agente(name,usuario,phone,passwd) VALUES(?, ?, ?, ?)",
             [name, usuario, phone, passwd]
