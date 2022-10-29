@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- para graficas -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+    <link rel="stylesheet" href="../public/css/morris.css">
+    
+    <script src ="../public/js/morris.min.js" charset="utf-8"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+    </script>
+    <title>Data</title>
+    <style>
+        body { background:rgb(229, 227, 227); }
+    </style>
+</head>
+<body>
+    
+<div class="flex"> 
+    <h1>Gráficas de Buses sin Inicio de recorrido por Módulo. </h1> <hr>
+    <h4>Los datos de las siguientes gráficas son de prueba e inverosímiles. </h4> <hr>
+
+<div class ="flex">
+    <div class ="col-md-6" >
+        <h2>Gráfica de línea.</h2> <hr>
+        <div id ="myfirstchart" >    </div>
+    </div>
+    <div class ="col-md-6">
+        <h2>Eventos de Tiempo.</h2> <hr>
+        <div id ="graphT">    </div>
+    </div>
+    <div class ="col-md-6">
+        <h2>Gráfica Dona.</h2> <hr>
+        <div id ="graphD">    </div>
+    </div>
+    <div class ="col-md-6">
+        <h2>Eventos de Tiempo.</h2> <hr>
+        <div id ="graphT">    </div>
+    </div>
+    
+    <div class ="col-md-6">
+        <h2>Format de fechas AAAA-MM-DD</h2> <hr>
+        <div id ="graphF">    </div>
+    </div>
+    <div class ="col-md-6">
+        <h2>Gráfica de Area.</h2> <hr>
+        <div id="graphArea"></div>
+    </div>
+    
+    <div class ="col-md-6">
+    <h2>Gráficos de áreas que se comportan como el Mar.</h2> <hr>
+    <div id ="g_area0">    </div>
+
+    
+    </div>
+
+
+</div>
+
+    <button type="button" id="botData" class="btn btn-primary">Cargar Datos</button>
+
+<script src="./lineas.js" charset="utf-8"></script>
+</body>
+
+
+
+</html>
