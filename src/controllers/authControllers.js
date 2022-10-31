@@ -1,11 +1,11 @@
-import {jwt} from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import bcryptjs from 'bcryptjs'
 import {pool} from '../db.js'
 import {promisify} from 'util'
 
 
 
-exports.register = async(req, res) =>{
+export const register = async(req, res) =>{
     try {
     const name = req.body.name
     const user = req.body.user
@@ -46,7 +46,7 @@ exports.register = async(req, res) =>{
     
 }
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
     try {
         const user = req.body.user
         const pass = req.body.pass
@@ -93,7 +93,7 @@ exports.login = async (req, res) => {
             alertIcon:'success',
                         showConfirmButton: true,
                         timer: false,
-                        ruta: ''
+                        ruta: '/pages/index.ejs'
         })
                 }
             })
@@ -102,20 +102,21 @@ exports.login = async (req, res) => {
 
     } catch (error){ console.log(error)}
 }
-
-exports.isAuthenticated= async (req, res, next) => {
+        
+export const isAuthenticated = async (req, res,next) => {
 
     if (req.cookies.jwt){
         try {
             const decodedToken = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
             pool.query('SELECT * FROM USERS WHEN id = ',[decodedToken].id, (error, results) => {
-                if(!results){   return next()}
+                if(!results){   return next() 
+                }
                 req.user = results[0]
                 return next()
             }) 
         } catch (error) {
             console.log(error)
-            return next()
+            
         } 
     }   else {
         res.redirect('/login')
@@ -123,7 +124,8 @@ exports.isAuthenticated= async (req, res, next) => {
     }
 }
 
-exports.logout = (req, res) =>{
+export const logout = (req, res) =>{
     res.clearCookie('jwt')
     return res.redirect('/')
 }
+

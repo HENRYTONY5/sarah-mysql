@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 
 
 import agentesRoutes from './routes/agentes.routes.js'
+import pages from './routes/router.routes.js'
 //import Routes from './routes/router.js'
 import indexR from './routes/index.routes.js'
 
@@ -28,16 +29,23 @@ app.use(cors())
 // app.get("/", function (req, res) {
 //      res.render("../pages/index");
 //   });
-  app.get("/login", function (req, res) {
-    res.render("../pages/login");
-  });
-  app.get("/register", function (req, res) {
-    res.render("../pages/register");
-  });
-  app.get("/", function (req, res) {
-    res.render("../pages/index");
-  });
 
+
+
+
+  // app.get("/login", function (req, res) {
+  //   res.render("../pages/login");
+  // });
+  // app.get("/register", function (req, res) {
+  //   res.render("../pages/register");
+  // });
+  // app.get("/", function (req, res) {
+  //   res.render("../pages/index");
+  // });
+
+
+
+  app.use('/',pages)
 //app.use(indexR) -> pong
 //app.use('/api',Routes)
 app.use('/api',agentesRoutes)
