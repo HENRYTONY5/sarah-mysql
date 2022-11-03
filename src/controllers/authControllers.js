@@ -1,8 +1,7 @@
-import jwt from 'jsonwebtoken'
+
 import bcryptjs from 'bcryptjs'
 import {pool} from '../db.js'
 import {promisify} from 'util'
-
 
 
 export const register = async(req, res) =>{
@@ -103,26 +102,7 @@ export const login = async (req, res) => {
     } catch (error){ console.log(error)}
 }
         
-export const isAuthenticated = async (req, res,next) => {
 
-    if (req.cookies.jwt){
-        try {
-            const decodedToken = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
-            pool.query('SELECT * FROM USERS WHEN id = ',[decodedToken].id, (error, results) => {
-                if(!results){   return next() 
-                }
-                req.user = results[0]
-                return next()
-            }) 
-        } catch (error) {
-            console.log(error)
-            
-        } 
-    }   else {
-        res.redirect('/login')
-        
-    }
-}
 
 export const logout = (req, res) =>{
     res.clearCookie('jwt')
