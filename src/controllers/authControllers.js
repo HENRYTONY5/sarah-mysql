@@ -1,7 +1,12 @@
+//promesas comunicacion asincronas retorno favorable o no funcioan corectamente reject
+import pkg from 'jsonwebtoken';
+const { jwt } = pkg;
+// const { json } = require('body-parser')
 
 import bcryptjs from 'bcryptjs'
 import {pool} from '../db.js'
 import {promisify} from 'util'
+
 
 
 export const register = async(req, res) =>{
@@ -101,11 +106,32 @@ export const login = async (req, res) => {
 
     } catch (error){ console.log(error)}
 }
+export const isAuthenticated= async (req, res, next) => {
+
+    if (req.cookies.jwt){
+        try {
+            const decodedToken = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRETO)
+            conexion.query('SELECT * FROM USERS WHEN id = ',[decodedToken].id, (error, results) => {
+                if(!results){   return next()}
+                req.user = results[0]
+                return next()
+            }) 
+        } catch (error) {
+            console.log(error)
+            return next()
+        } 
+    }   else {
+        res.redirect('/indexadmin')
         
+    }
+}  
 
 
 export const logout = (req, res) =>{
     res.clearCookie('jwt')
     return res.redirect('/')
 }
+
+
+
 
